@@ -1,0 +1,4 @@
+#See https://help.gethub.com/artices/ignoring-files/ for more about ignoring files
+
+#dependencies
+/node_modules

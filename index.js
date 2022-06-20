@@ -1,11 +1,14 @@
-const inquirer = require('inquirer');
+// const Employee = require('/lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
+
+const inquirer = require('inquirer');
 const fs = require('fs');
+// const path = require('path');
 
 const generateHTML = require('./dist/generateHTML');
-const employeeList = []
+const Team = [];
 
 
 const managerInput = () => {
@@ -34,7 +37,7 @@ const managerInput = () => {
     ])
     .then(answers => {
       const manager = new Manager(answers.name, answers.id, answers.email, answers.office);
-      employeeList.push(manager)
+      Team.push(manager)
       addEmployee();
     });
 }
@@ -56,7 +59,7 @@ const addEmployee = () => {
       } else if (answers.name === 'Intern') {
         internInput();
       } else {
-        const html = generateHTML(employeeList);
+        const html = generateHTML(Team);
         fs.writeFile('index.html', html, (err) =>
         err ? console.log(err) : console.log('Successfully created index.html!')
     );
@@ -90,7 +93,7 @@ const addEmployee = () => {
       ])
       .then(answers => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-        employeeList.push(engineer)
+        Team.push(engineer)
         addEmployee();
       });
 
@@ -122,7 +125,7 @@ const addEmployee = () => {
       ])
       .then(answers => {
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
-        employeeList.push(intern)
+        Team.push(intern)
         addEmployee();
       });
   }
